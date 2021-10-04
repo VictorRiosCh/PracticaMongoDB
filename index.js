@@ -1,29 +1,27 @@
-const express = require('express'); //sintaxis de exportación node.js
+const express = require('express'); //Sintaxis de importacion en node
 require('dotenv').config();
-//Importamos la BD
 const {dbConection} = require('./config/database');
 const cors = require('cors');
-
-//const { request } = require('express');
 
 //Crear el servidor express
 const app = express();
 
-//Cors en un middleware, configuramos cors
+//Configurar cors
 app.use(cors());
 
-//Estableciendo conexion a la BD
+//Estableciendo conexion a la base de datos
 dbConection();
-console.log(process.env);
-//Rutas de la API Proyectos
+//console.log(process.env);
+//Rutas de la API proyectos
 app.get('/', (req, res)=>{
     res.json({
-        ok:true,
-        msg: 'Bienvenidos a NodeJS'
+        ok: true,
+        msg: 'Bienvenidos a node JS'
     });
 });
+
+
 //Código para arrancar el servidor
 app.listen(process.env.PORT, ()=>{
     console.log('Servidor desplegado en el puerto '+process.env.PORT);
 })
-
