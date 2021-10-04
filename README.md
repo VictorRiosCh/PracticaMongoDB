@@ -1,5 +1,5 @@
 # Administrador de Proyectos de Investigacion - Backend
-Ejecutar el sgte códigp para generar las dependencias
+Ejecutar el sgte código para generar las dependencias
 ...
 npm install
 ...
