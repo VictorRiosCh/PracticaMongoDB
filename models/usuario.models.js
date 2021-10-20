@@ -5,6 +5,11 @@ const UsuarioSchema = Schema({
         type: String,
         require: true
     },
+    dni:{
+        type: Number,
+        require: true,
+        unique: true
+    },
     email:{
         type: String,
         require: true,   
@@ -27,7 +32,6 @@ const UsuarioSchema = Schema({
         default: false  
     },
 });
-
 UsuarioSchema.method('toJSON', function(){
     const {__v, _id, password, ...object} = this.toObject();
     object.uid = _id;

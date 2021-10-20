@@ -3,8 +3,9 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario.models');
 
 const getUsuarios = async (req, res)=>{
+    const {email} = req.body;
+    const usuarios = await Usuario.findOne({email}, 'nombre dni email role google');
 
-    const usuarios = await Usuario.find({}, 'nombre email role google');
     res.json({
         ok: true,
         usuarios  
@@ -14,9 +15,17 @@ const getUsuarios = async (req, res)=>{
 const crearUsuario = async(req, res=response)=>{
 
     //console.log(req.body);
-    const {email,password,nombre} = req.body;
+    const {email,password,nombre, dni} = req.body;
 
     try {
+
+        const existeDni = await Usuario.findOne({dni});
+        if(existeDni){
+            return res.status(400).json({
+                ok:false,
+                msg: 'El DNI ya ha sido registrado'
+            });
+        }
 
         const existeEmail = await Usuario.findOne({email});
         if(existeEmail){
